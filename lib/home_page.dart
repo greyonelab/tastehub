@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
+              // Header Content
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
