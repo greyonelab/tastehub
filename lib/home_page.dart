@@ -59,28 +59,28 @@ class HomePage extends StatelessWidget {
                       "Mie Kuah Topping Seafood",
                       "Farhan Fauzan A",
                       "20 Min",
-                      "assets/image/featured1.png",
+                      "assets/image/mie_food.jpg",
                       context,
                     ),
                     _featuredCard(
                       "Pancake Pisang Madu",
                       "Caca Sandi Permana",
                       "25 Min",
-                      "assets/image/featured2.png",
+                      "assets/image/pancake2.jpg",
                       context,
                     ),
                     _featuredCard(
                       "Soup Vgeratian Food",
                       "Rina Nurhasanah",
                       "30 Min",
-                      "assets/image/featured3.png",
+                      "assets/image/soup_food.jpg",
                       context,
                     ),
                     _featuredCard(
                       "Nasi Goreng Telur Kecap",
                       "Sopyan Yusuf",
                       "35 Min",
-                      "assets/image/featured4.png",
+                      "assets/image/nasgor.jpg",
                       context,
                     ),
                   ],
@@ -138,10 +138,10 @@ class HomePage extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
-                childAspectRatio: 0.78,
+                childAspectRatio: 0.69, //sebelumnya 0.78
                 children: [
                   _recipeCard(
-                    "Salad Renyah ala Nusantara",
+                    "Salad Renyah Nusantara",
                     "assets/image/salad.jpg",
                     "120 Kalori",
                     "20 Min",
@@ -194,12 +194,12 @@ class HomePage extends StatelessWidget {
   // === Widget kecil ===
 
   static Widget _featuredCard(
-    String title,
-    String author,
-    String time,
-    String imagePath,
-    BuildContext context,
-  ) {
+      String title,
+      String author,
+      String time,
+      String imagePath,
+      BuildContext context,
+      ) {
     return GestureDetector(
       onTap: () {
         // Aksi ketika card di klik
@@ -217,15 +217,14 @@ class HomePage extends StatelessWidget {
               image: AssetImage(imagePath),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(
-                  0.3,
-                ), // Sedikit lebih gelap untuk kontras teks
+                Colors.black.withOpacity(0.3),
                 BlendMode.darken,
               ),
             ),
+            // PERUBAHAN DI SINI: Shadow diubah menjadi hitam
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF6DC8C7).withOpacity(0.3),
+                color: Colors.black.withOpacity(0.3), // Shadow hitam
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -284,12 +283,12 @@ class HomePage extends StatelessWidget {
   }
 
   static Widget _recipeCard(
-    String title,
-    String image,
-    String calorie,
-    String time,
-    BuildContext context,
-  ) {
+      String title,
+      String image,
+      String calorie,
+      String time,
+      BuildContext context,
+      ) {
     return GestureDetector(
       onTap: () {
         // Aksi ketika card di klik

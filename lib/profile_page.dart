@@ -6,126 +6,164 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF5F5F5),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ====== Header ======
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // ===== Header dengan Gambar dan Profil =====
+              Stack(
                 children: [
-                  const Text(
-                    'Akun',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF073B3A),
+                  Container(
+                    height: 220,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/image/bg_profile.jpg"),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.settings_outlined,
-                      color: Colors.black87,
-                      size: 26,
-                    ),
-                    onPressed: () {
-                      // Arahkan ke halaman pengaturan nanti
-                    },
+                  Container(
+                    height: 220,
+                    color: Colors.black.withOpacity(0.25),
                   ),
-                ],
-              ),
-              const SizedBox(height: 20),
-
-              // ====== Kartu Profil ======
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12.withOpacity(0.08),
-                      blurRadius: 6,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 28,
-                      backgroundImage: AssetImage('assets/profile.jpg'),
-                    ),
-                    const SizedBox(width: 14),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Column(
                       children: const [
+                        CircleAvatar(
+                          radius: 42,
+                          backgroundImage:
+                              AssetImage("assets/image/foto_profile.jpg"),
+                        ),
+                        SizedBox(height: 10),
                         Text(
-                          'Rina Nur Hasanah',
+                          "Jumbo",
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.black87,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
                           ),
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'Pembuat Resep',
-                          style: TextStyle(fontSize: 13, color: Colors.black54),
+                          "Wiwok detok, Not onli tok de tok. Kuku-rukuk atok atok, Pokoke yo tok de tok.",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white70,
+                          ),
                         ),
+                        SizedBox(height: 16),
                       ],
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 30),
-
-              // ====== Bagian Unggahan ======
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    'Unggahan',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF073B3A),
-                    ),
-                  ),
-                  Text(
-                    'Semua',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF6EB4A6),
-                    ),
                   ),
                 ],
               ),
+
+              const SizedBox(height: 20),
+
+              // ====== Kartu Menu 1 ======
+              _buildMenuCard([
+                _buildMenuItem(
+                  icon: Icons.location_on_outlined,
+                  label: "Biodata",
+                  onTap: () {},
+                ),
+                _buildMenuItem(
+                  icon: Icons.person_outline,
+                  label: "Akun Saya",
+                  onTap: () {},
+                ),
+              ]),
+
               const SizedBox(height: 16),
 
-              // ====== Grid Card Unggahan ======
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildRecipeCard(
-                    image: 'assets/sate.jpg',
-                    title: 'Sate Kambing Madura',
-                    author: 'Rina Nur Hasanah',
+              // ====== Kartu Menu 2 ======
+              _buildMenuCard([
+                _buildMenuItem(
+                  icon: Icons.notifications_none,
+                  label: "Notifikasi",
+                  onTap: () {
+                    Navigator.pushNamed(context, '/notification_page');
+                  },
+                ),
+                _buildMenuItem(
+                  icon: Icons.lock_outline,
+                  label: "Password dan Keamanan",
+                  onTap: () {},
+                ),
+                _buildMenuItem(
+                  icon: Icons.language_outlined,
+                  label: "Bahasa",
+                  onTap: () {},
+                ),
+              ]),
+
+              const SizedBox(height: 16),
+
+              // ====== Kartu Menu 3 ======
+              _buildMenuCard([
+                _buildMenuItem(
+                  icon: Icons.add_circle_outline,
+                  label: "Tambah Resep",
+                  onTap: () {
+                    Navigator.pushNamed(context, '/chef_page');
+                  },
+                ),
+                _buildMenuItem(
+                  icon: Icons.info_outline,
+                  label: "Tentang Aplikasi",
+                  onTap: () {},
+                ),
+                _buildMenuItem(
+                  icon: Icons.feedback_outlined,
+                  label: "Saran dan Masukan",
+                  onTap: () {},
+                ),
+                _buildMenuItem(
+                  icon: Icons.help_outline,
+                  label: "FAQ",
+                  onTap: () {},
+                ),
+              ]),
+
+              const SizedBox(height: 16),
+
+              // ====== Tutup Akun dan Logout ======
+              _buildMenuCard([
+                _buildMenuItem(
+                  icon: Icons.delete_forever_outlined,
+                  label: "Tutup / Hapus Akun",
+                  color: Colors.redAccent,
+                  onTap: () {},
+                ),
+              ]),
+
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF073B3A),
+                    minimumSize: const Size(double.infinity, 48),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
-                  _buildRecipeCard(
-                    image: 'assets/pempek.jpg',
-                    title: 'Pempek Selam/Dos Palembang',
-                    author: 'Rina Nur Hasanah',
+                  onPressed: () {},
+                  child: const Text(
+                    "Keluar / Logout",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
                   ),
-                ],
+                ),
               ),
+              const SizedBox(height: 40),
             ],
           ),
         ),
@@ -133,84 +171,46 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // ====== Widget Kartu Resep ======
-  Widget _buildRecipeCard({
-    required String image,
-    required String title,
-    required String author,
-  }) {
+  // ====== Widget Menu Card ======
+  Widget _buildMenuCard(List<Widget> children) {
     return Container(
-      width: 160,
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12.withOpacity(0.08),
-            blurRadius: 5,
-            offset: const Offset(0, 3),
+            color: Colors.black12.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Gambar resep
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
-            ),
-            child: Image.asset(
-              image,
-              width: double.infinity,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-            ).copyWith(top: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: Colors.black87,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 10,
-                      backgroundImage: AssetImage('assets/profile.jpg'),
-                    ),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(
-                        author,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.black54,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
-          ),
-        ],
+      child: Column(children: children),
+    );
+  }
+
+  // ====== Widget Item Menu ======
+  Widget _buildMenuItem({
+    required IconData icon,
+    required String label,
+    required VoidCallback onTap,
+    Color color = Colors.black87,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: color),
+      title: Text(
+        label,
+        style: TextStyle(
+          color: color,
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
+        ),
       ),
+      trailing: const Icon(Icons.arrow_forward_ios_rounded,
+          size: 16, color: Colors.black45),
+      onTap: onTap,
     );
   }
 }
