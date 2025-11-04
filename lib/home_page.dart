@@ -1,4 +1,8 @@
+// ========================================
+// File: lib/home_page.dart
+// ========================================
 import 'package:flutter/material.dart';
+import 'resep/nasi_goreng/bahan.dart'; // Import halaman bahan
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -61,6 +65,7 @@ class HomePage extends StatelessWidget {
                       "20 Min",
                       "assets/image/featured1.png",
                       context,
+                      null,
                     ),
                     _featuredCard(
                       "Pancake Pisang Madu",
@@ -68,6 +73,7 @@ class HomePage extends StatelessWidget {
                       "25 Min",
                       "assets/image/featured2.png",
                       context,
+                      null,
                     ),
                     _featuredCard(
                       "Soup Vgeratian Food",
@@ -75,6 +81,7 @@ class HomePage extends StatelessWidget {
                       "30 Min",
                       "assets/image/featured3.png",
                       context,
+                      null,
                     ),
                     _featuredCard(
                       "Nasi Goreng Telur Kecap",
@@ -82,6 +89,14 @@ class HomePage extends StatelessWidget {
                       "35 Min",
                       "assets/image/featured4.png",
                       context,
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NasiGorengBahanPage(),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -191,18 +206,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // === Widget kecil ===
-
   static Widget _featuredCard(
     String title,
     String author,
     String time,
     String imagePath,
     BuildContext context,
+    VoidCallback? onTap,
   ) {
     return GestureDetector(
-      onTap: () {
-        // Aksi ketika card di klik
+      onTap: onTap ?? () {
         print('Featured card tapped: $title');
       },
       child: MouseRegion(
@@ -211,15 +224,13 @@ class HomePage extends StatelessWidget {
           width: 220,
           margin: const EdgeInsets.only(right: 12),
           decoration: BoxDecoration(
-            color: const Color(0xFF6DC8C7), // Warna solid yang diminta
+            color: const Color(0xFF6DC8C7),
             borderRadius: BorderRadius.circular(16),
             image: DecorationImage(
               image: AssetImage(imagePath),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(
-                  0.3,
-                ), // Sedikit lebih gelap untuk kontras teks
+                Colors.black.withOpacity(0.3),
                 BlendMode.darken,
               ),
             ),
@@ -292,8 +303,16 @@ class HomePage extends StatelessWidget {
   ) {
     return GestureDetector(
       onTap: () {
-        // Aksi ketika card di klik
-        print('Resep yang dipilih bagain: $title');
+        if (title.toLowerCase().contains('nasi goreng')) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NasiGorengBahanPage(),
+            ),
+          );
+        } else {
+          print('Resep yang dipilih: $title');
+        }
       },
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
@@ -312,7 +331,6 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Gambar persegi 1:1
               ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
@@ -344,8 +362,6 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // Detail
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
@@ -402,7 +418,6 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// Widget untuk kategori dengan state
 class _CategorySection extends StatefulWidget {
   @override
   __CategorySectionState createState() => __CategorySectionState();

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'home_page.dart';
+import 'register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +39,7 @@ class OnboardingScreen extends StatelessWidget {
                     // pindah ke halaman Home
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (_) => const LoginPage()),
+                      MaterialPageRoute(builder: (_) => const HomePage()),
                     );
                   },
                   child: const Text(
@@ -102,8 +104,11 @@ class OnboardingScreen extends StatelessWidget {
                 // Tombol Create New Account
                 TextButton(
                   onPressed: () {
-                    // nanti bisa diarahkan ke halaman SignUp
-                  },
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (_) => const SignUpPage()),
+                        );
+                      },
                   child: const Text(
                     "Create New Account",
                     style: TextStyle(color: Colors.white, fontSize: 16),

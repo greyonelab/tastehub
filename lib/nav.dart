@@ -37,17 +37,24 @@ class _HomePageState extends State<nav> {
       body: _pages[_selectedIndex],
 
       // FAB (ikon chef)
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF073B3A),
-        elevation: 6,
-        onPressed: () {
-          setState(() {
-            _selectedIndex = 2;
-          });
-        },
-        shape: const CircleBorder(),
-        child: const Icon(Icons.restaurant_menu, color: Colors.white, size: 28),
-      ),
+// FAB (ikon chef)
+floatingActionButton: FloatingActionButton(
+  backgroundColor: const Color(0xFF073B3A),
+  elevation: 6,
+  onPressed: () {
+    setState(() {
+      _selectedIndex = 2;
+    });
+  },
+  shape: const CircleBorder(),
+  child: Padding(
+    padding: const EdgeInsets.all(8),
+    child: Image.asset(
+      "assets/image/logo-1.png",
+      fit: BoxFit.contain,
+    ),
+  ),
+),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       // Bottom navigation bar
